@@ -18,6 +18,7 @@ void led_task(void *p) {
     pwm_set_enabled(slice_num, true);
 
     while (true) {
+        vTaskDelay(pdMS_TO_TICKS(1000));  // Delay de 1 segundo
     }
 }
 
@@ -25,10 +26,11 @@ int main() {
     stdio_init_all();
     printf("Start RTOS \n");
 
-    xTaskCreate(led_task, "LED_Task 1", 256, NULL, 1, NULL);
+    xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
 
     vTaskStartScheduler();
 
     while (true)
         ;
+    return 0; // Adicionando retorno 0 ao final da função main
 }
